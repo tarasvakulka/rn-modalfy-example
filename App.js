@@ -1,13 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { ModalProvider, createModalStack } from 'react-native-modalfy'
+
+import TestModal from './components/TestModal';
+import TestComponent from './components/TestComponent';
+
+const modalConfig = { TestModal }
+const defaultOptions = { backdropOpacity: 0.6 }
+
+const stack = createModalStack(modalConfig, defaultOptions)
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ModalProvider stack={stack}>
+      <View style={styles.container}>
+        <TestComponent  />
+        <StatusBar style="auto" />
+      </View>
+    </ModalProvider>
   );
 }
 
@@ -17,5 +28,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
